@@ -18,8 +18,12 @@
 # include <unistd.h>
 
 int		ft_printf(const char *input, ...);
-void    ft_putchar(char c, int *len);
-void    ft_putstr(char *str, int *count);
+void	ft_putchar(char c, int *len);
+void	ft_putstr(char *str, int *count);
+void	ft_putnbr(int n, int *count);
+void	ft_print_unsigned(unsigned int n, int *count);
+void	ft_print_hexa_lower(unsigned int n, int *count);
+void	ft_print_hexa_upper(unsigned int n, int *count);
+void	ft_print_pointer(unsigned long int n, int *count);
 
 #endif
-

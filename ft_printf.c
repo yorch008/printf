@@ -12,64 +12,62 @@
 
 #include "ft_printf.h"
 
-int ft_found (char c, va_list args, int *count)
+int	ft_found(char c, va_list args, int *count)
 {
-    if(c == 'c')
-        ft_putchar(va_arg(args, int), count);
-    else if(c == 's')
-        ft_putstr(va_arg(args, char *), count);
-    // else if(c == 'p')
-    else if(c == 'd' || c == 'i')
-        ft_putstr(va_arg(args, int), count);
-    // else if(c == 'u')
-    // else if(c == 'x')
-    // else if(c == 'X')
-    else if(c == '%')
-        ft_putchar('%', count);
-    return (*count);
-
+	if (c == 'c')
+		ft_putchar(va_arg(args, int), count);
+	else if (c == 's')
+		ft_putstr(va_arg(args, char *), count);
+	else if (c == 'd' || c == 'i')
+		ft_putnbr(va_arg(args, int), count);
+	else if (c == 'u')
+		ft_print_unsigned(va_arg(args, unsigned int), count);
+	else if (c == 'x')
+		ft_print_hexa_lower(va_arg(args, unsigned int), count);
+	else if (c == 'X')
+		ft_print_hexa_upper(va_arg(args, unsigned int), count);
+	else if (c == 'p')
+		ft_print_pointer(va_arg(args, unsigned long int), count);
+	else if (c == '%')
+		ft_putchar('%', count);
+	return (*count);
 }
 
-int ft_printf(char const *format, ...)
+int	ft_printf(char const *format, ...)
 {
-    va_list args;
-    va_start(args, format);
+	va_list		args;
+	int			i;
+	int			count;
 
-    int i;
-    int count;
-
-    count = 0;
-    i = 0;
-    while(format[i])
-    {
-        if(format[i] == '%')
-        {
-            ft_found(format[i + 1], args, &count);
-            i++;
-            
-        }
-        else
-        {
-            ft_putchar(format[i], &count);
-            count++;
-        } 
-        i++;
-    }
-    
-    va_end(args);
-    
-    return (count);
+	va_start(args, format);
+	count = 0;
+	i = 0;
+	while (format[i])
+	{
+		if (format[i] == '%')
+		{
+			ft_found(format[i + 1], args, &count);
+			i++;
+		}
+		else
+		{
+			ft_putchar(format[i], &count);
+		}
+		i++;
+	}
+	va_end(args);
+	return (count);
 }
 
-int main(void)
-{
-    int i;
-    char c[] = "HOLA ME LLA";
+// int main(void)
+// {
+//     int i;
+//     // char c[] = "HOLA ME LLA";
+//     unsigned int c = 10;
 
-    i = ft_printf("mioo: %s", c);
-    printf("%d\n", i);
-    i = printf("real: %s", c);
-    printf("%d\n", i);
-
-    return (0);
-}
+//     i = printf("real: %x -->", c);
+//     printf("%d\n", i);
+//     i = ft_printf("mioo: %x -->", c);
+//     printf("%d\n", i);
+//     return (0);
+// }

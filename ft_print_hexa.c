@@ -1,31 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_string.c                                  :+:      :+:    :+:   */
+/*   ft_print_hexa.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: johernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/11 23:33:19 by johernan          #+#    #+#             */
-/*   Updated: 2023/10/11 23:33:23 by johernan         ###   ########.fr       */
+/*   Created: 2023/11/14 01:08:20 by johernan          #+#    #+#             */
+/*   Updated: 2023/11/14 01:08:22 by johernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putstr(char *str, int *count)
+void	ft_print_hexa_lower(unsigned int n, int *count)
 {
-	int	i;
+	char	*hexdigits;
 
-	i = 0;
-	if (!str)
+	hexdigits = "0123456789abcdef";
+	if (n >= 16)
 	{
-		write(1, "(null)", 6);
-		(*count) += 6;
-		return ;
+		ft_print_hexa_lower(n / 16, count);
 	}
-	while (str[i] != 0)
+	ft_putchar(hexdigits[n % 16], count);
+}
+
+void	ft_print_hexa_upper(unsigned int n, int *count)
+{
+	char	*hexdigits;
+
+	hexdigits = "0123456789ABCDEF";
+	if (n >= 16)
 	{
-		ft_putchar(str[i], count);
-		i++;
+		ft_print_hexa_upper(n / 16, count);
 	}
+	ft_putchar(hexdigits[n % 16], count);
 }

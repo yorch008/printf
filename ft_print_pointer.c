@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_string.c                                  :+:      :+:    :+:   */
+/*   ft_print_pointer.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: johernan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/11 23:33:19 by johernan          #+#    #+#             */
-/*   Updated: 2023/10/11 23:33:23 by johernan         ###   ########.fr       */
+/*   Created: 2023/11/14 19:21:55 by johernan          #+#    #+#             */
+/*   Updated: 2023/11/14 19:21:56 by johernan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putstr(char *str, int *count)
+void	ft_print_hexa_lower2(unsigned long int n, int *count)
 {
-	int	i;
+	char	*hexdigits;
 
-	i = 0;
-	if (!str)
+	hexdigits = "0123456789abcdef";
+	if (n >= 16)
 	{
-		write(1, "(null)", 6);
-		(*count) += 6;
-		return ;
+		ft_print_hexa_lower2(n / 16, count);
 	}
-	while (str[i] != 0)
-	{
-		ft_putchar(str[i], count);
-		i++;
-	}
+	ft_putchar(hexdigits[n % 16], count);
+}
+
+void	ft_print_pointer(unsigned long int n, int *count)
+{
+	ft_putstr("0x", count);
+	if (n == 0)
+		ft_putchar('0', count);
+	else
+		ft_print_hexa_lower2(n, count);
 }

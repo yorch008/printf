@@ -16,7 +16,11 @@ CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 SRC = ft_printf.c \
 		ft_print_char.c\
-		ft_print_string.c
+		ft_print_string.c\
+		ft_print_num.c\
+		ft_print_unsigned.c\
+		ft_print_hexa.c\
+		ft_print_pointer.c
 
 OBJ = $(SRC:.c=.o)
 
